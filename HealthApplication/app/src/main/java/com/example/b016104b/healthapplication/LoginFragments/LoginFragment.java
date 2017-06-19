@@ -1,11 +1,13 @@
-package com.example.b016104b.healthapplication.Activities;
+package com.example.b016104b.healthapplication.LoginFragments;
 
-import android.app.Activity;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import com.example.b016104b.healthapplication.Activities.MainActivity;
 import com.example.b016104b.healthapplication.R;
 import com.example.b016104b.healthapplication.app.AppController;
 import com.example.b016104b.healthapplication.app.AppConfig;
@@ -27,8 +30,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends Activity {
-    private static final String TAG = RegisterActivity.class.getSimpleName();
+public class LoginFragment extends Fragment {
+
+    private static final String TAG = RegisterFragment.class.getSimpleName();
     private Button btnLogin;
     private Button btnLinkToRegister;
     private Button btnLinkToReset;
@@ -39,32 +43,35 @@ public class LoginActivity extends Activity {
     private SQLiteHandler db;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.password);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-        btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
-        btnLinkToReset = (Button) findViewById(R.id.btnLinkToReset);
+        super.onCreate(savedInstanceState);
+        //getView().setContentView(R.layout.activity_login);
+
+        View v = inflater.inflate(R.layout.activity_login, container, false);
+
+        inputEmail = (EditText) v.findViewById(R.id.email);
+        inputPassword = (EditText) v.findViewById(R.id.password);
+        btnLogin = (Button) v.findViewById(R.id.btnLogin);
+        btnLinkToRegister = (Button) v.findViewById(R.id.btnLinkToRegisterScreen);
+        btnLinkToReset = (Button) v.findViewById(R.id.btnLinkToReset);
 
         // Progress dialog
-        pDialog = new ProgressDialog(this);
+        pDialog = new ProgressDialog(getActivity());
         pDialog.setCancelable(false);
 
         // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
+        db = new SQLiteHandler(getActivity().getApplicationContext());
 
         // Session manager
-        session = new SessionManager(getApplicationContext());
+        session = new SessionManager(getActivity().getApplicationContext());
 
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
-            finish();
+            getActivity().finish();
         }
 
         // Login button Click Event
@@ -80,7 +87,7 @@ public class LoginActivity extends Activity {
                     checkLogin(email, password);
                 } else {
                     // Prompt user to enter credentials
-                    Toast.makeText(getApplicationContext(),
+                    Toast.makeText(getActivity().getApplicationContext(),
                             "Please enter your credentials!", Toast.LENGTH_LONG)
                             .show();
                 }
@@ -92,10 +99,11 @@ public class LoginActivity extends Activity {
         btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),
-                        RegisterActivity.class);
-                startActivity(i);
-                finish();
+                RegisterFragment nextFrag= new RegisterFragment();
+                getActivity().getFragmentManager().beginTransaction()
+                        .replace(R.id.rootLayout, nextFrag,"1")
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -103,13 +111,14 @@ public class LoginActivity extends Activity {
         btnLinkToReset.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent ii = new Intent(getApplicationContext(),
-                        ResetActivity.class);
-                startActivity(ii);
-                finish();
+                ResetFragment resFrag = new ResetFragment();
+                getActivity().getFragmentManager().beginTransaction()
+                        .replace(R.id.rootLayout, resFrag,"1")
+                        .addToBackStack(null)
+                        .commit();
             }
         });
-
+        return v;
     }
 
     /**
@@ -120,7 +129,9 @@ public class LoginActivity extends Activity {
         String tag_string_req = "req_login";
 
         pDialog.setMessage("Logging in ...");
-        showDialog();
+        if (!getActivity().isFinishing()) {
+            showDialog();
+        }
 
         StringRequest strReq = new StringRequest(Method.POST,
                 AppConfig.URL_LOGIN, new Response.Listener<String>()
@@ -154,20 +165,20 @@ public class LoginActivity extends Activity {
                         db.addUser(name, email, uid, created_at);
 
                         // Launch main activity
-                        Intent intent = new Intent(LoginActivity.this,
+                        Intent intent = new Intent(getActivity(),
                                 MainActivity.class);
                         startActivity(intent);
-                        finish();
+                        getActivity().finish();
                     } else {
                         // Error in login. Get the error message
                         String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
+                        Toast.makeText(getActivity().getApplicationContext(),
                                 errorMsg, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -176,7 +187,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
+                Toast.makeText(getActivity().getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
                 hideDialog();
             }
@@ -199,12 +210,12 @@ public class LoginActivity extends Activity {
     }
 
     private void showDialog() {
-        if (!pDialog.isShowing())
+        if (!getActivity().isFinishing())
             pDialog.show();
     }
 
     private void hideDialog() {
-        if (pDialog.isShowing())
+        if (!getActivity().isFinishing())
             pDialog.dismiss();
     }
 }

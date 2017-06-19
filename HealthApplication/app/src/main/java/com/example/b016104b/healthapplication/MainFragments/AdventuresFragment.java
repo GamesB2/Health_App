@@ -1,4 +1,4 @@
-package com.example.b016104b.healthapplication.Fragments;
+package com.example.b016104b.healthapplication.MainFragments;
 
 import android.app.Fragment;
 import android.os.Bundle;

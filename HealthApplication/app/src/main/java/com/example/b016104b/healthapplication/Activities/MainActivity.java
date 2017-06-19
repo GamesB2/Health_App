@@ -2,6 +2,7 @@ package com.example.b016104b.healthapplication.Activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.app.Fragment;
@@ -9,9 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.b016104b.healthapplication.Fragments.AdventuresFragment;
-import com.example.b016104b.healthapplication.Fragments.ProfileFragment;
-import com.example.b016104b.healthapplication.Fragments.StatisticFragment;
+import com.example.b016104b.healthapplication.Helper.SQLiteHandler;
+import com.example.b016104b.healthapplication.Helper.SessionManager;
+import com.example.b016104b.healthapplication.MainFragments.AdventuresFragment;
+import com.example.b016104b.healthapplication.MainFragments.ProfileFragment;
+import com.example.b016104b.healthapplication.MainFragments.StatisticFragment;
 import com.example.b016104b.healthapplication.R;
 
 public class MainActivity extends AppCompatActivity
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity
                 }
             });
         }
+        SQLiteDatabase mydatabase = openOrCreateDatabase("android_api",MODE_PRIVATE,null);
 
         pushFragment(new ProfileFragment());
     }

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.b016104b.healthapplication.LoginFragments.LoginFragment;
+
 /**
  * Created by a025178g on 08/06/2017.
  */
@@ -18,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 try {
                     sleep(2000);
-                    Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),InitAuth.class);
                     startActivity(intent);
                     finish();
                 } catch (InterruptedException e) {

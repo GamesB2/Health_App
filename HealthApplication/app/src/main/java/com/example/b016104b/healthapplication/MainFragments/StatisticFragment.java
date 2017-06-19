@@ -1,4 +1,4 @@
-package com.example.b016104b.healthapplication.Fragments;
+package com.example.b016104b.healthapplication.MainFragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -13,12 +13,12 @@ import com.example.b016104b.healthapplication.R;
  * Created by b016104b on 16/06/2017.
  */
 
-public class ProfileFragment extends Fragment{
+public class StatisticFragment extends Fragment{
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.profile_fragment, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        return inflater.inflate(R.layout.statistic_fragment, container, false);
     }
-
 }
-
