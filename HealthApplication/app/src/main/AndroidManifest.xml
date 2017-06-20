@@ -33,7 +33,8 @@
         <activity android:name=".Activities.InitAuth"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
 
-        <service android:name=".app.StepCounterTracker"/>
+        <service android:name=".app.StepCounterTracker"
+        android:stopWithTask="false"/>
 
     </application>
 
