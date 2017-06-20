@@ -24,15 +24,9 @@
 
 
     </RelativeLayout>
-
-    <android.support.v4.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-
-
-    </android.support.v4.widget.NestedScrollView>
+        android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -140,6 +134,7 @@
                     android:textColor="#f14545"
                     android:textSize="24dp"
                     android:textStyle="bold" />
+
             </LinearLayout>
 
             <TextView
@@ -156,4 +151,5 @@
 
         </RelativeLayout>
     </RelativeLayout>
+    </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

@@ -4,6 +4,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.example.b016104b.healthapplication.LoginFragments.LoginFragment;
 import com.example.b016104b.healthapplication.R;
@@ -15,6 +17,9 @@ public class InitAuth extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.init_auth);
 
         LoginFragment loginFragment = new LoginFragment();

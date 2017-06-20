@@ -7,11 +7,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import com.example.b016104b.healthapplication.Helper.SQLiteHandler;
+
 public class AppController extends Application {
 
     public static final String TAG = AppController.class.getSimpleName();
 
     private RequestQueue mRequestQueue;
+
+    public static SQLiteHandler db = null;
 
     private static AppController mInstance;
 
@@ -47,5 +51,15 @@ public class AppController extends Application {
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(tag);
         }
+    }
+
+    public void setDb(SQLiteHandler db)
+    {
+        this.db = db;
+    }
+
+    public SQLiteHandler getDb()
+    {
+        return this.db;
     }
 }

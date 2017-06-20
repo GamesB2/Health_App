@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -46,7 +47,6 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        //getView().setContentView(R.layout.activity_login);
 
         View v = inflater.inflate(R.layout.activity_login, container, false);
 
@@ -61,7 +61,15 @@ public class LoginFragment extends Fragment {
         pDialog.setCancelable(false);
 
         // SQLite database handler
-        db = new SQLiteHandler(getActivity().getApplicationContext());
+        if (AppController.getInstance().getDb() == null)
+        {
+            AppController.getInstance().setDb(new SQLiteHandler(getActivity().getApplicationContext()));
+            db = AppController.getInstance().getDb();
+        }
+        else
+        {
+            db = AppController.getInstance().getDb();
+        }
 
         // Session manager
         session = new SessionManager(getActivity().getApplicationContext());
@@ -163,6 +171,8 @@ public class LoginFragment extends Fragment {
 
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at);
+
+
 
                         // Launch main activity
                         Intent intent = new Intent(getActivity(),

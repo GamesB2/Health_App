@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -95,6 +96,8 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         View v = inflater.inflate(R.layout.activity_register, container, false);
 
         inputFullName = (EditText) v.findViewById(R.id.name);
@@ -118,7 +121,15 @@ public class RegisterFragment extends Fragment {
         session = new SessionManager(getActivity().getApplicationContext());
 
         // SQLite database handler
-        db = new SQLiteHandler(getActivity().getApplicationContext());
+        if (AppController.getInstance().getDb() == null)
+        {
+            AppController.getInstance().setDb(new SQLiteHandler(getActivity().getApplicationContext()));
+            db = AppController.getInstance().getDb();
+        }
+        else
+        {
+
+        }
 
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
