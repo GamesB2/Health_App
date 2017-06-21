@@ -12,6 +12,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 public class SQLiteHandler extends SQLiteOpenHelper {

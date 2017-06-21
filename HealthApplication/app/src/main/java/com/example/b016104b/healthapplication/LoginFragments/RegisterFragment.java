@@ -1,7 +1,8 @@
-package com.example.b016104b.healthapplication.Activities;
+package com.example.b016104b.healthapplication.LoginFragments;
 
 //Add the imports needed
 
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,10 +14,12 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import com.example.b016104b.healthapplication.Activities.MainActivity;
 import com.example.b016104b.healthapplication.Helper.SessionManager;
 import com.example.b016104b.healthapplication.Helper.SQLiteHandler;
 import com.example.b016104b.healthapplication.R;
@@ -52,9 +56,11 @@ import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import static android.app.Activity.RESULT_OK;
 
-public class RegisterActivity extends AppCompatActivity {
-    private static final String TAG = RegisterActivity.class.getSimpleName();
+
+public class RegisterFragment extends Fragment {
+    private static final String TAG = RegisterFragment.class.getSimpleName();
     private Button btnRegister;
     private Button btnLinkToLogin;
     private Button btnSelPhoto;
@@ -86,21 +92,21 @@ public class RegisterActivity extends AppCompatActivity {
     StringBuilder stringBuilder;
     String unique_id="1";
 
-
-
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
 
-        inputFullName = (EditText) findViewById(R.id.name);
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.password);
-        btnRegister = (Button) findViewById(R.id.btnRegister);
-        btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
-        btnSelPhoto = (Button) findViewById(R.id.btnSelectImage);
-        img_user_photo = (ImageView) findViewById(R.id.img_reg_userphoto);
+
+
+        View v = inflater.inflate(R.layout.activity_register, container, false);
+
+        inputFullName = (EditText) v.findViewById(R.id.name);
+        inputEmail = (EditText) v.findViewById(R.id.email);
+        inputPassword = (EditText) v.findViewById(R.id.password);
+        btnRegister = (Button) v.findViewById(R.id.btnRegister);
+        btnLinkToLogin = (Button) v.findViewById(R.id.btnLinkToLoginScreen);
+        btnSelPhoto = (Button) v.findViewById(R.id.btnSelectImage);
+        img_user_photo = (ImageView) v.findViewById(R.id.img_reg_userphoto);
 
         byteArrayOutputStream = new ByteArrayOutputStream();
 
@@ -108,22 +114,30 @@ public class RegisterActivity extends AppCompatActivity {
         //String imageUri = "drawable://" + R.drawable.default_avatar;
 
         // Progress dialog
-        pDialog = new ProgressDialog(this);
+        pDialog = new ProgressDialog(getActivity());
         pDialog.setCancelable(false);
 
         // Session manager
-        session = new SessionManager(getApplicationContext());
+        session = new SessionManager(getActivity().getApplicationContext());
 
         // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
+        if (AppController.getInstance().getDb() == null)
+        {
+            AppController.getInstance().setDb(new SQLiteHandler(getActivity().getApplicationContext()));
+            db = AppController.getInstance().getDb();
+        }
+        else
+        {
+
+        }
 
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
-            Intent intent = new Intent(RegisterActivity.this,
+            Intent intent = new Intent(getActivity(),
                     MainActivity.class);
             startActivity(intent);
-            finish();
+            getActivity().finish();
         }
 
         // Register Button Click event
@@ -136,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
                     registerUser(name, email, password);
                 } else {
-                    Toast.makeText(getApplicationContext(),
+                    Toast.makeText(getActivity().getApplicationContext(),
                             "Please enter your details!", Toast.LENGTH_LONG)
                             .show();
                 }
@@ -147,10 +161,11 @@ public class RegisterActivity extends AppCompatActivity {
         btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),
-                        LoginActivity.class);
-                startActivity(i);
-                finish();
+                LoginFragment nextFrag= new LoginFragment();
+                getActivity().getFragmentManager().beginTransaction()
+                        .replace(R.id.rootLayout, nextFrag,"1")
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -162,7 +177,7 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(intent, "Select Image From Gallery"), 1);
             }
         });
-
+        return v;
     }
 
     /**
@@ -206,20 +221,20 @@ public class RegisterActivity extends AppCompatActivity {
                         unique_id = uid;
                         ImageUploadToServerFunction();
 
-                        Toast.makeText(getApplicationContext(), "You Have Successfully Registered. Please Try login now!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "You Have Successfully Registered. Please Try login now!", Toast.LENGTH_LONG).show();
 
                         // Launch login activity
-                        Intent intent = new Intent(
-                                RegisterActivity.this,
-                                LoginActivity.class);
-                        startActivity(intent);
-                        finish();
+                        LoginFragment nextFrag= new LoginFragment();
+                        getActivity().getFragmentManager().beginTransaction()
+                                .replace(R.id.rootLayout, nextFrag,"1")
+                                .addToBackStack(null)
+                                .commit();
                     } else {
 
                         // Error occurred in registration. Get the error
                         // message
                         String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
+                        Toast.makeText(getActivity().getApplicationContext(),
                                 errorMsg, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
@@ -232,7 +247,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Registration Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
+                Toast.makeText(getActivity().getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
                 hideDialog();
             }
@@ -268,13 +283,13 @@ public class RegisterActivity extends AppCompatActivity {
     //User profile image stuff
 
     @Override
-    protected void onActivityResult(int RC, int RQC, Intent I) {
+    public void onActivityResult(int RC, int RQC, Intent I) {
         super.onActivityResult(RC, RQC, I);
 
         if (RC == 1 && RQC == RESULT_OK && I != null && I.getData() != null) {
             Uri uri = I.getData();
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
                 img_user_photo.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -294,7 +309,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                progressDialog = ProgressDialog.show(RegisterActivity.this,"Image is Uploading","Please Wait",false,false);
+                progressDialog = ProgressDialog.show(getActivity(),"Image is Uploading","Please Wait",false,false);
             }
 
             @Override
@@ -304,7 +319,7 @@ public class RegisterActivity extends AppCompatActivity {
                 // Dismiss the progress dialog after done uploading.
                 progressDialog.dismiss();
                 // Printing uploading success message coming from server on android app.
-                Toast.makeText(RegisterActivity.this,string1,Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),string1,Toast.LENGTH_LONG).show();
                 // Setting image as transparent after done uploading.
                 img_user_photo.setImageResource(android.R.color.transparent);
             }

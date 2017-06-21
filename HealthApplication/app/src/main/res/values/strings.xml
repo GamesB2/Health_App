@@ -25,7 +25,6 @@
     <string name="Adventures">Adventures</string>
     <string name="Statistics">Statistics</string>
 
-
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
@@ -53,6 +52,15 @@
 
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
+
+
+    <string-array name="splash_strings">
+        <item>Yolo</item>
+        <item>Who dis new fone</item>
+        <item>Albert Enstein once ate 45 carrots</item>
+        <item>U did good kid</item>
+        <item>Thats rough, buddy</item>
+    </string-array>
 
     <string name="pref_title_sync_frequency">Sync frequency</string>
     <string-array name="pref_sync_frequency_titles">
