@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.UiThread;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,9 @@ public class ProfileFragment extends Fragment{
         TextView y = (TextView)v.findViewById(R.id.userProfileName);
         y.setText(user.get("email"));
 
+
+
+
         SharedPreferences prefs = AppController.getInstance().getSharedPreferences("com.example.b016104b", Context.MODE_PRIVATE);
         if(prefs.contains("count"))
         {
@@ -70,6 +74,13 @@ public class ProfileFragment extends Fragment{
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
+    }
+
+    public void DisplayOnUI(float currentcount)
+    {
+        String count = Float.toString(currentcount);
+
+
     }
 }
 

@@ -2,25 +2,23 @@ package com.example.b016104b.healthapplication.Activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 
 import com.example.b016104b.healthapplication.Helper.SQLiteHandler;
-import com.example.b016104b.healthapplication.Helper.SessionManager;
-import com.example.b016104b.healthapplication.MainFragments.AdventuresFragment;
+import com.example.b016104b.healthapplication.MainFragments.ActiveFragment;
 import com.example.b016104b.healthapplication.MainFragments.ProfileFragment;
 import com.example.b016104b.healthapplication.MainFragments.StatisticFragment;
 import com.example.b016104b.healthapplication.R;
@@ -45,7 +43,7 @@ public class MainActivity extends AppCompatActivity
 
         stepCount = new StepCounterTracker();
 
-        mSensorManager.registerListener(stepCount, mSensor, 10);
+        mSensorManager.registerListener(stepCount, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
         Intent intent = new Intent(getApplicationContext(),StepCounterTracker.class);
 
@@ -91,7 +89,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.action_adventures:
                 // Action to perform when Bag Menu item is selected.
-                pushFragment(new AdventuresFragment());
+                pushFragment(new ActiveFragment());
                 break;
             case R.id.action_statistics:
                 // Action to perform when Account Menu item is selected.
@@ -120,5 +118,29 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public void popUpMenu(View view)
+    {
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener()
+        {
+            @Override
+            public boolean onMenuItemClick(MenuItem item)
+            {
+                String itemID = item.getTitle().toString();
+                switch(itemID)
+                {
+                    case "Settings":
+                    {
+                        //startSettings();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
 
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.overflow_menu, popup.getMenu());
+        popup.show();
+    }
 }
