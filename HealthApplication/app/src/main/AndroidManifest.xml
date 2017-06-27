@@ -37,6 +37,7 @@
         <receiver android:name=".app.MyBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.ACTION_RECEIVE_GEOFENCE" />
             </intent-filter>
         </receiver>
 

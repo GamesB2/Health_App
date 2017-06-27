@@ -27,7 +27,6 @@ public class StepCounterTracker extends Service implements SensorEventListener {
 
     String count;
 
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
@@ -36,8 +35,6 @@ public class StepCounterTracker extends Service implements SensorEventListener {
         {
             count = prefs.getString("count", "defaultifnothingfound");
         }
-
-
 
         return super.onStartCommand(intent, flags, START_STICKY);
     }

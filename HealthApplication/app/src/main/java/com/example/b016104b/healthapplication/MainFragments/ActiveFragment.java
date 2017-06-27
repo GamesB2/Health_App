@@ -2,7 +2,9 @@ package com.example.b016104b.healthapplication.MainFragments;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.Context;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -17,7 +19,6 @@ import com.example.b016104b.healthapplication.R;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-
 /**
  * Created by b016104b on 16/06/2017.
  */
@@ -26,7 +27,7 @@ public class ActiveFragment extends Fragment{
 
         MapView mMapView;
         private GoogleMap googleMap;
-
+        LocationManager locationManager;
 
         @Nullable
         @Override
@@ -39,6 +40,8 @@ public class ActiveFragment extends Fragment{
             mMapView.onCreate(savedInstanceState);
 
             mMapView.onResume(); // needed to get the map to display immediately
+
+            this.getContext().getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
 
             try {
                 MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -54,13 +57,13 @@ public class ActiveFragment extends Fragment{
                     // For showing a move to my location button
                     try {
                         googleMap.setMyLocationEnabled(true);
+
                     }
                     catch (SecurityException e) {
                         Log.d(e.toString(), e.getMessage());
                     }
 
                     // For zooming automatically to the location of the marker
-
                     //googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 }
             });
