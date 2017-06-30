@@ -16,11 +16,15 @@ import com.example.b016104b.healthapplication.R;
 
 public class StatisticFragment extends Fragment{
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        View v = inflater.inflate(R.layout.statistic_fragment, container, false);
 
-        return inflater.inflate(R.layout.statistic_fragment, container, false);
+
+
+        return v;
     }
 }

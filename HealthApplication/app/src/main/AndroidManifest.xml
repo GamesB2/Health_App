@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.b016104b.healthapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-feature android:name="android.hardware.sensor.stepcounter" />
 
+    <uses-sdk android:minSdkVersion="14"
+        android:targetSdkVersion="14" />
 
     <application
         android:name=".app.AppController"
@@ -17,6 +22,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDkTMy7dLmxu3GLQttBfDBDsnwPLFseiCM"/>
+
         <activity android:name=".Activities.SplashActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
@@ -26,6 +34,20 @@
             </intent-filter>
         </activity>
 
+        <service android:name=".app.IntentReciever">
+            <intent-filter>
+                <action android:name="com.example.w028006g.regnlogin.ACTION_RECEIVE_GEOFENCE" />
+            </intent-filter>
+        </service>
+
+
+        <receiver android:name=".app.MyBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.ACTION_RECEIVE_GEOFENCE" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".Activities.MainActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
@@ -33,7 +55,8 @@
         <activity android:name=".Activities.InitAuth"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
 
-        <service android:name=".app.StepCounterTracker"/>
+        <service android:name=".app.StepCounterTracker"
+        android:stopWithTask="false"/>
 
     </application>
 

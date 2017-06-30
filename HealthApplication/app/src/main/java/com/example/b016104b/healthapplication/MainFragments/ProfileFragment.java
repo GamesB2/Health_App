@@ -6,12 +6,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.UiThread;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.b016104b.healthapplication.Activities.MainActivity;
 import com.example.b016104b.healthapplication.Helper.SQLiteHandler;
 import com.example.b016104b.healthapplication.Helper.SessionManager;
 import com.example.b016104b.healthapplication.R;
@@ -71,5 +74,12 @@ public class ProfileFragment extends Fragment{
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
     }
+
+    public void DisplayOnUI(float currentcount)
+    {
+        String count = Float.toString(currentcount);
+    }
+
+
 }
 
