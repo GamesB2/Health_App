@@ -36,9 +36,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:id="@+id/relativeLayout2">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -55,10 +56,6 @@
                     android:layout_alignBottom="@+id/linearLayout"
                     android:scaleType="centerCrop"
                     android:src="@color/colorAccent" />
-
-                <android.support.v7.widget.Toolbar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
@@ -127,6 +124,7 @@
                 android:id="@+id/linearLayout2">
 
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -139,17 +137,36 @@
 
             <TextView
                 android:id="@+id/profilefluff"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="50dp"
                 android:padding="16dp"
                 android:orientation="vertical"
+                android:layout_below="@+id/linearLayout2"
+                android:text="Recent Journeys"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/linearLayout2">
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
 
             </TextView>
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/qrbutton"
+                android:onClick="launchQR"
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:layout_alignBaseline="@+id/profilefluff"
+                android:layout_alignBottom="@+id/profilefluff"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="192dp"
+                android:layout_marginStart="192dp" />
 
         </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/relativeLayout2" />
     </RelativeLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

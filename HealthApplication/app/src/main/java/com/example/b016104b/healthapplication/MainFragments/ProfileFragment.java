@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.b016104b.healthapplication.Activities.MainActivity;
 import com.example.b016104b.healthapplication.Helper.SQLiteHandler;
 import com.example.b016104b.healthapplication.Helper.SessionManager;
 import com.example.b016104b.healthapplication.R;
@@ -47,9 +49,6 @@ public class ProfileFragment extends Fragment{
         TextView y = (TextView)v.findViewById(R.id.userProfileName);
         y.setText(user.get("email"));
 
-
-
-
         SharedPreferences prefs = AppController.getInstance().getSharedPreferences("com.example.b016104b", Context.MODE_PRIVATE);
         if(prefs.contains("count"))
         {
@@ -79,8 +78,8 @@ public class ProfileFragment extends Fragment{
     public void DisplayOnUI(float currentcount)
     {
         String count = Float.toString(currentcount);
-
-
     }
+
+
 }
 

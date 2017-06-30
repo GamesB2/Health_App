@@ -4,6 +4,8 @@ package com.example.b016104b.healthapplication.app;
  * Created by b016104b on 26/06/2017.
  */
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +18,12 @@ public class MyBroadcastReceiver extends BroadcastReceiver
 {
 
     Intent broadcastIntent = new Intent();
+    protected Context context;
+
+    protected NotificationManager notificationManager;
+    protected Notification notification;
+
+
 
     @Override
     public void onReceive(Context context, Intent intent)
@@ -30,22 +38,6 @@ public class MyBroadcastReceiver extends BroadcastReceiver
                 Intent startServiceIntent = new Intent(context, StepCounterTracker.class);
                 context.startService(startServiceIntent);
                 break;
-            case "ACTION_RECEIVE_GEOFENCE":
-                GeofencingEvent geoEvent = GeofencingEvent.fromIntent(intent);
-                if (geoEvent.hasError())
-                {
-                    Toast.makeText(context, geoEvent.getErrorCode(), Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(context, "Successfuly recieved GeoFence", Toast.LENGTH_SHORT).show();
-
-                    int transitionType = geoEvent.getGeofenceTransition();
-                    if (transitionType == Geofence.GEOFENCE_TRANSITION_ENTER)
-                    {
-
-                    }
-                }
         }
     }
 }

@@ -19,6 +19,9 @@ import com.example.b016104b.healthapplication.R;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+
+
+
 /**
  * Created by b016104b on 16/06/2017.
  */
@@ -28,6 +31,7 @@ public class ActiveFragment extends Fragment{
         MapView mMapView;
         private GoogleMap googleMap;
         LocationManager locationManager;
+
 
         @Nullable
         @Override
@@ -42,6 +46,10 @@ public class ActiveFragment extends Fragment{
             mMapView.onResume(); // needed to get the map to display immediately
 
             this.getContext().getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+
+
+
+
 
             try {
                 MapsInitializer.initialize(getActivity().getApplicationContext());
