@@ -40,6 +40,9 @@
             </intent-filter>
         </service>
 
+        <service android:name=".Helper.RemoteSQLHandler">
+        </service>
+
 
         <receiver android:name=".app.MyBroadcastReceiver">
             <intent-filter>

@@ -13,13 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
+import com.example.b016104b.healthapplication.Helper.ManipulateMap;
+import com.example.b016104b.healthapplication.Helper.RemoteSQLHandler;
+import com.example.b016104b.healthapplication.ObjectClasses.TotemPost;
 import com.google.android.gms.maps.GoogleMap;
 
 import com.example.b016104b.healthapplication.R;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
 /**
@@ -48,9 +52,6 @@ public class ActiveFragment extends Fragment{
             this.getContext().getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
 
 
-
-
-
             try {
                 MapsInitializer.initialize(getActivity().getApplicationContext());
             } catch (Exception e) {
@@ -62,6 +63,18 @@ public class ActiveFragment extends Fragment{
                 public void onMapReady(GoogleMap mMap) {
                     googleMap = mMap;
 
+                    if (RemoteSQLHandler.totems != null)
+                    {
+                        MarkerOptions markerOptions = new MarkerOptions();
+
+                        for (int i = 0; i < RemoteSQLHandler.totems.size(); i++)
+                        {
+                            LatLng temp = new LatLng(RemoteSQLHandler.totems.get(i).latf, RemoteSQLHandler.totems.get(i).lngf);
+
+                            googleMap.addMarker(markerOptions.position(temp));
+
+                        }
+                    }
                     // For showing a move to my location button
                     try {
                         googleMap.setMyLocationEnabled(true);
