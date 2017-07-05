@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+android:layout_width="fill_parent"
+android:layout_height="fill_parent" android:background="@color/icon"
+xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:layout_width="400dp"
+        android:layout_height="100dp"
+        android:id="@+id/points1"
+        android:text="Your Points: "
+        android:layout_marginTop="30dip" />
+    <TextView
+        android:layout_width="400dp"
+        android:layout_height="100dp"
+        android:id="@+id/points2"
+        android:text="25"
+        android:layout_marginTop="30dip"
+        android:layout_marginLeft="90dip"/>
+    <TextView
+        android:layout_width="400dp"
+        android:layout_height="100dp"
+        android:id="@+id/points3"
+        android:text="Schmeckles"
+        android:layout_marginTop="30dip"
+        android:layout_marginLeft="110dip"/>
+
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="100dp"
+        android:id="@+id/bar1"
+        android:src="@drawable/bars1"
+        android:layout_marginBottom="344dip"
+        android:layout_gravity="center_horizontal|bottom" />
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:id="@+id/card"
+        android:src="@drawable/voucher"
+        android:layout_marginBottom="400dip"
+        android:layout_marginRight="95dip"
+        android:layout_gravity="center|bottom"/>
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:id="@+id/card1"
+        android:src="@drawable/voucher"
+        android:layout_marginBottom="400dip"
+        android:layout_gravity="center_horizontal|bottom"/>
+
+
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="100dp"
+        android:id="@+id/bar2"
+        android:src="@drawable/bars1"
+        android:layout_marginBottom="244dip"
+        android:layout_gravity="center_horizontal|bottom"/>
+
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:id="@+id/card4"
+        android:src="@drawable/card"
+        android:layout_marginBottom="300dip"
+        android:layout_marginRight="95dip"
+        android:layout_gravity="center|bottom"/>
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:id="@+id/card5"
+        android:src="@drawable/card"
+        android:layout_marginBottom="300dip"
+        android:layout_gravity="center_horizontal|bottom"/>
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:id="@+id/card6"
+        android:src="@drawable/card"
+        android:layout_marginBottom="300dip"
+        android:layout_marginLeft="95dip"
+        android:layout_gravity="center|bottom"/>
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="100dp"
+        android:id="@+id/bar3"
+        android:src="@drawable/bars1"
+        android:layout_marginBottom="139dip"
+        android:layout_gravity="center_horizontal|bottom"/>
+
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:id="@+id/card7"
+        android:src="@drawable/card"
+        android:layout_marginBottom="195dip"
+        android:layout_marginRight="95dip"
+        android:layout_gravity="center|bottom"/>
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:id="@+id/card8"
+        android:src="@drawable/card"
+        android:layout_marginBottom="195dip"
+        android:layout_gravity="center_horizontal|bottom"/>
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:id="@+id/card9"
+        android:src="@drawable/card"
+        android:layout_marginBottom="195dip"
+        android:layout_marginLeft="95dip"
+        android:layout_gravity="center|bottom"/>
+
+
+    <ImageView
+        android:id="@+id/bar4"
+        android:layout_width="400dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="39dip"
+        android:src="@drawable/bars1"
+        android:layout_gravity="center_horizontal|bottom"/>
+
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:id="@+id/card11"
+        android:src="@drawable/card"
+        android:layout_marginBottom="95dip"
+        android:layout_gravity="center_horizontal|bottom"/>
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:id="@+id/card12"
+        android:src="@drawable/card"
+        android:layout_marginBottom="95dip"
+        android:layout_marginLeft="95dip"
+        android:layout_gravity="center|bottom"/>
+
+    <ImageView
+        android:id="@+id/card10"
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="95dip"
+        android:layout_marginRight="95dip"
+        android:src="@drawable/card" />
+
+    <ImageView
+        android:id="@+id/card2"
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="400dip"
+        android:layout_marginLeft="95dip"
+        android:src="@drawable/voucher" />
+
+</FrameLayout>

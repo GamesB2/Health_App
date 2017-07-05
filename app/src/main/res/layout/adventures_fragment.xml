@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:weightSum="2"
+    android:layout_alignParentBottom="true">
+
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        app:background="@android:color/transparent"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        android:id="@+id/cardView">
+
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="2">
+
+            <EditText
+                android:id="@+id/gSearch"
+                android:layout_width="356dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.03"
+                android:background="@color/white"
+                android:hint="Search"
+                android:paddingLeft="10dp"
+                android:textColor="#b71c1c" />
+
+            <ImageView
+                android:id="@+id/search_button"
+                android:layout_width="43dp"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/gSearch"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="right"
+                android:padding="5dp"
+                android:src="@drawable/piniconsmall" />
+        </GridLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapviewarea"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/cardView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+    </com.google.android.gms.maps.MapView>
+
+
+</RelativeLayout>
