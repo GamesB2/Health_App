@@ -19,7 +19,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
 import com.example.b016104b.healthapplication.Activities.MainActivity;
-import com.example.b016104b.healthapplication.Helper.RemoteSQLHandler;
 import com.example.b016104b.healthapplication.R;
 import com.example.b016104b.healthapplication.app.AppController;
 import com.example.b016104b.healthapplication.app.AppConfig;

@@ -7,23 +7,30 @@ import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.text.format.DateUtils;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.support.design.widget.BottomNavigationView;
 
+import com.example.b016104b.healthapplication.Helper.BottomNavigationViewHelper;
 import com.example.b016104b.healthapplication.Helper.GeofenceStore;
-import com.example.b016104b.healthapplication.Helper.RemoteSQLHandler;
+import com.example.b016104b.healthapplication.Helper.My_Points;
 import com.example.b016104b.healthapplication.Helper.SQLiteHandler;
 import com.example.b016104b.healthapplication.MainFragments.ActiveFragment;
 import com.example.b016104b.healthapplication.MainFragments.ProfileFragment;
 import com.example.b016104b.healthapplication.MainFragments.QRFragment;
+import com.example.b016104b.healthapplication.MainFragments.ShopFragment;
 import com.example.b016104b.healthapplication.MainFragments.StatisticFragment;
 import com.example.b016104b.healthapplication.R;
 import com.example.b016104b.healthapplication.app.AppController;
@@ -32,85 +39,91 @@ import com.example.b016104b.healthapplication.app.MyBroadcastReceiver;
 import com.example.b016104b.healthapplication.app.StepCounterTracker;
 import com.google.android.gms.location.Geofence;
 
+
+import java.lang.reflect.Field;
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity
 {
 
     private StepCounterTracker stepCount;
     private SensorManager mSensorManager;
     private Sensor mSensor;
-    private SQLiteHandler db;
+    public SQLiteHandler db;
     private GeofenceStore geoStore;
+    public HashMap<String, String> user;
+
+    String name;
+    String email;
+    String u_id;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Create persistent classes needed for whole app
-        mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         stepCount = new StepCounterTracker();
         mSensorManager.registerListener(stepCount, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
         geoStore = new GeofenceStore();
 
-        Intent intent = new Intent(getApplicationContext(),StepCounterTracker.class);
+        Intent intent = new Intent(getApplicationContext(), StepCounterTracker.class);
         this.startService(intent);
         Intent intent1 = new Intent(getApplicationContext(), IntentReciever.class);
         this.startService(intent1);
         Intent intent2 = new Intent(getApplicationContext(), MyBroadcastReceiver.class);
         this.startService(intent2);
-        Intent service = new Intent(getApplicationContext(), RemoteSQLHandler.class);
-        this.startService(service);
-
-
 
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        if (db == null)
-        {
+        if (db == null) {
             db = AppController.getInstance().getDb();
         }
-
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-
-        if (bottomNavigationView != null)
+        if (user == null)
         {
-            // Set action to perform when any menu-item is selected.
-            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
-            {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item)
-                {
-                    selectFragment(item);
-                    return false;
+            user = AppController.getInstance().getDb().getUserDetails();
+        }
+
+        HashMap<String, String> user = db.getUserDetails();
+        name = user.get("name");
+        email = user.get("email");
+        u_id = user.get("uid");
+
+
+        //Menu bar at the bottom
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(true);
+
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.ic_profile:
+                        pushFragment(new ProfileFragment());
+                        break;
+
+                    case R.id.ic_statistics:
+                        pushFragment(new StatisticFragment());
+                        break;
+
+                    case R.id.ic_map:
+                        pushFragment(new ActiveFragment());
+                        break;
+
+                    case R.id.ic_shop:
+                        pushFragment(new ShopFragment());
+                        break;
                 }
-            });
-        }
-
-        pushFragment(new ProfileFragment());
-    }
-
-
-    protected void selectFragment(MenuItem item) {
-
-        item.setChecked(true);
-
-        switch (item.getItemId()) {
-            case R.id.action_profile:
-                // Action to perform when Home Menu item is selected.
-                pushFragment(new ProfileFragment());
-                break;
-            case R.id.action_adventures:
-                // Action to perform when Bag Menu item is selected.
-                pushFragment(new ActiveFragment());
-                break;
-            case R.id.action_statistics:
-                // Action to perform when Account Menu item is selected.
-                pushFragment(new StatisticFragment());
-                break;
-        }
+                return false;
+            }
+        });
     }
 
 

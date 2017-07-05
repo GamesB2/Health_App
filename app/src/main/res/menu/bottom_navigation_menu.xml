@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/ic_profile"
+        android:icon="@drawable/profileiconnocolour"
+        android:title="Profile"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/ic_statistics"
+        android:icon="@drawable/staticticslargenocolour"
+        android:title="Stats"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/ic_map"
+        android:icon="@drawable/walkingicon"
+        android:title="Routes"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/ic_shop"
+        android:icon="@drawable/shopiconnocolour"
+        android:title="Shop"
+        app:showAsAction="ifRoom"/>
+</menu>

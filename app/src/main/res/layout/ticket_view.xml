@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/T_V">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.88"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true">
+
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:columnCount="1"
+                    android:rowCount="3">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:scaleType="center"
+                        android:src="@drawable/voucher" />
+
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        android:text="Alton Towers 20% off!"
+                        android:textAlignment="center"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/event_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:paddingStart="20dp"
+                        android:text="Valid until: 22/12/2017" />
+
+
+                    <TextView
+                        android:id="@+id/summary"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="20dp"
+                        android:text="Get 20% off entry price at Alton Towers for a great day out!
+The Monorail opens at 8:30am every day. We want to make sure you are at the park entrance ready for opening so you can enjoy your amazing visit to Alton Towers Resort.
+
+If you book your tickets online, an Annual Pass holder or are a hotel guest (plus other select tickets) you are entitled to Early Ride Time. Selected rides and attractions will be open from 9am.  Tesco ticket holders are not entitled to ERT>" />
+
+                    <Button
+                        android:id="@+id/redeem_ticket"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/button"
+                        android:text="Redeem Voucher Now!" />
+
+                </GridLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
