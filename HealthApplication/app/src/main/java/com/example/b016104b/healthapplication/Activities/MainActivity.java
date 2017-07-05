@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 
 import com.example.b016104b.healthapplication.Helper.GeofenceStore;
+import com.example.b016104b.healthapplication.Helper.RemoteSQLHandler;
 import com.example.b016104b.healthapplication.Helper.SQLiteHandler;
 import com.example.b016104b.healthapplication.MainFragments.ActiveFragment;
 import com.example.b016104b.healthapplication.MainFragments.ProfileFragment;
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity
         this.startService(intent1);
         Intent intent2 = new Intent(getApplicationContext(), MyBroadcastReceiver.class);
         this.startService(intent2);
+        Intent service = new Intent(getApplicationContext(), RemoteSQLHandler.class);
+        this.startService(service);
 
 
 
