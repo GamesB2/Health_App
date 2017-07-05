@@ -1,4 +1,4 @@
-package com.example.b016104b.healthapplication;
+package com.example.b016104b.healthapplication.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.b016104b.healthapplication.Activities.MainActivity;
+import com.example.b016104b.healthapplication.R;
 import com.example.b016104b.healthapplication.app.AppConfig;
-import com.example.b016104b.healthapplication.Helper.DatabaseRetrieval;
+import com.example.b016104b.healthapplication.Helper.RemoteSQLHandler;
 import com.example.b016104b.healthapplication.Helper.Post;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -52,21 +53,21 @@ public class MultiMedia extends YouTubeBaseActivity implements
         Intent mIntent1 = getIntent();
         final int intValue = mIntent1.getIntExtra("id", 0);
 
-        if( intValue > 0)
-        {
-            for(int i =0;i< DatabaseRetrieval.postsAl.size();i++)
-            {
-                if(DatabaseRetrieval.postsAl.get(i).getIdI() == intValue)
-                {
-                    p = DatabaseRetrieval.postsAl.get(i);
-                }
-            }
-
-        }
-        else
-        {
-            p = DatabaseRetrieval.postsAl.get(2);
-        }
+//        if( intValue > 0)
+//        {
+//            for(int i =0;i< DatabaseRetrieval.postsAl.size();i++)
+//            {
+//                if(DatabaseRetrieval.postsAl.get(i).getIdI() == intValue)
+//                {
+//                    p = DatabaseRetrieval.postsAl.get(i);
+//                }
+//            }
+//
+//        }
+//        else
+//        {
+//            p = DatabaseRetrieval.postsAl.get(2);
+//        }
       
         txtSummary.setText(p.getSummary());
         txtName.setText(p.getName());

@@ -25,7 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.b016104b.healthapplication.Helper.DatabaseRetrieval;
+import com.example.b016104b.healthapplication.Helper.SQLiteHandler;
 import com.example.b016104b.healthapplication.Helper.MyRecyclerViewAdapter;
 import com.example.b016104b.healthapplication.Helper.My_Points;
 import com.example.b016104b.healthapplication.Helper.SessionManager;
@@ -62,7 +62,7 @@ public class ShopFragment extends Fragment{
 
     private SessionManager session;
     private CardView btnCard1;
-    public ArrayList<Ticket> t = DatabaseRetrieval.ticketsAl;
+    //public ArrayList<Ticket> t = DatabaseRetrieval.ticketsAl;
     private RecyclerView mRecyclerView;
     private MyRecyclerViewAdapter adapter;
     private Person p;

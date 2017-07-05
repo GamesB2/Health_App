@@ -1,4 +1,8 @@
 package com.example.b016104b.healthapplication.Helper;
+
+/**
+ * Created by b016104b on 04/07/2017.
+ */
 import android.util.Log;
 
 import java.io.BufferedInputStream;
@@ -11,12 +15,12 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-public class HttpHandler {
+    public class HTTPHandler {
 
 
-        private static final String TAG = HttpHandler.class.getSimpleName();
+        private static final String TAG = HTTPHandler.class.getSimpleName();
 
-        public HttpHandler() {
+        public HTTPHandler() {
         }
 
         public String makeServiceCall(String reqUrl) {
@@ -62,4 +66,3 @@ public class HttpHandler {
             return sb.toString();
         }
     }
-

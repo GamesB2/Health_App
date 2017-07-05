@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.b016104b.healthapplication.Helper.RemoteSQLHandler;
 import com.example.b016104b.healthapplication.LoginFragments.RegisterFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -107,6 +108,18 @@ public class ActiveFragment extends Fragment{
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(stoke));
                     mMap.moveCamera(CameraUpdateFactory.zoomTo(10));
 
+                    if (RemoteSQLHandler.totems != null)
+                    {
+                        MarkerOptions markerOptions = new MarkerOptions();
+
+                        for (int i = 0; i < RemoteSQLHandler.totems.size(); i++)
+                        {
+                            LatLng temp = new LatLng(RemoteSQLHandler.totems.get(i).latf, RemoteSQLHandler.totems.get(i).lngf);
+
+                            googleMap.addMarker(markerOptions.position(temp));
+
+                        }
+                    }
 
                     checkLocationPermission();
 

@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.example.b016104b.healthapplication.R;
 import com.example.b016104b.healthapplication.Activities.MainActivity;
-import com.example.b016104b.healthapplication.Helper.DatabaseRetrieval;
+import com.example.b016104b.healthapplication.Helper.RemoteSQLHandler;
 import com.example.b016104b.healthapplication.Helper.MyRecyclerViewAdapter;
 import com.example.b016104b.healthapplication.Helper.Ticket;
 import com.example.b016104b.healthapplication.app.AppController;
@@ -50,7 +50,7 @@ import static com.example.b016104b.healthapplication.app.AppConfig.READ_TIMEOUT;
 public class My_Points extends Fragment {
 
     private CardView btnCard1;
-    public ArrayList<Ticket> t = DatabaseRetrieval.ticketsAl;
+    //public ArrayList<Ticket> t = DatabaseRetrieval.ticketsAl;
     private RecyclerView mRecyclerView;
     private MyRecyclerViewAdapter adapter;
     private Person p;

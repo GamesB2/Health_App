@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.b016104b.healthapplication.MultiMedia;
+import com.example.b016104b.healthapplication.Activities.MultiMedia;
 import com.example.b016104b.healthapplication.R;
 
 import java.util.ArrayList;
